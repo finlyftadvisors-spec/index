@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>FinLyft Advisors</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#1a2744;--navy-light:#1e2e52;--navy-mid:#243460;
+  --tan:#d4b896;--tan-light:#e8d5bc;--tan-pale:#f5ede0;
+  --white:#ffffff;--text-muted:#a8b4c8;
+}
+body{font-family:'Georgia',serif;background:#fff;color:#1a2744;line-height:1.6}
+
+/* LOGO SVG components */
+.logo-svg-light{display:block}
+.logo-svg-dark{display:block}
+
+nav{background:var(--navy);padding:14px 40px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(212,184,150,0.15)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--tan-light);font-family:Arial,sans-serif;font-size:13px;letter-spacing:0.5px;transition:color 0.2s;text-decoration:none}
+.nav-links a:hover{color:var(--tan)}
+.nav-cta{background:var(--tan);color:var(--navy);padding:9px 20px;font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;border:none;cursor:pointer;transition:background 0.2s}
+.nav-cta:hover{background:var(--tan-light)}
+
+.hero{background:var(--navy);padding:80px 40px;display:flex;gap:60px;align-items:center;min-height:500px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;right:-80px;top:-80px;width:420px;height:420px;border:1px solid rgba(212,184,150,0.07);border-radius:50%}
+.hero::after{content:'';position:absolute;right:-40px;top:-40px;width:300px;height:300px;border:1px solid rgba(212,184,150,0.05);border-radius:50%}
+.hero-content{flex:1;z-index:1}
+.hero-eyebrow{font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;color:var(--tan);text-transform:uppercase;margin-bottom:20px}
+.hero-title{font-size:42px;color:#fff;font-weight:400;line-height:1.25;margin-bottom:16px}
+.hero-title em{color:var(--tan);font-style:italic}
+.hero-sub{font-family:Arial,sans-serif;font-size:15px;color:var(--text-muted);margin-bottom:32px;line-height:1.7}
+.hero-services{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:36px}
+.hero-tag{background:rgba(212,184,150,0.1);border:1px solid rgba(212,184,150,0.25);color:var(--tan-light);font-family:Arial,sans-serif;font-size:11px;letter-spacing:1px;padding:5px 12px}
+.hero-btns{display:flex;gap:14px;align-items:center}
+.btn-primary{background:var(--tan);color:var(--navy);padding:13px 28px;font-family:Arial,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.5px;border:none;cursor:pointer;transition:background 0.2s}
+.btn-primary:hover{background:var(--tan-light)}
+.btn-secondary{border:1px solid rgba(212,184,150,0.4);color:var(--tan-light);padding:13px 28px;font-family:Arial,sans-serif;font-size:13px;letter-spacing:0.5px;cursor:pointer;background:transparent;transition:all 0.2s}
+.btn-secondary:hover{border-color:var(--tan);color:var(--tan)}
+.hero-stats{flex:0 0 280px;z-index:1}
+.stat-card{background:rgba(255,255,255,0.04);border:1px solid rgba(212,184,150,0.15);padding:22px 26px;margin-bottom:12px}
+.stat-num{font-size:34px;color:var(--tan);font-weight:400;line-height:1}
+.stat-label{font-family:Arial,sans-serif;font-size:12px;color:var(--text-muted);letter-spacing:0.5px;margin-top:6px}
+
+section{padding:72px 40px}
+.section-eyebrow{font-family:Arial,sans-serif;font-size:11px;letter-spacing:3px;color:var(--tan);text-transform:uppercase;margin-bottom:14px;text-align:center}
+.section-title{font-size:32px;color:var(--navy);text-align:center;font-weight:400;margin-bottom:12px}
+.section-sub{font-family:Arial,sans-serif;font-size:15px;color:#666;text-align:center;margin-bottom:48px;max-width:560px;margin-left:auto;margin-right:auto}
+
+.problem{background:var(--tan-pale)}
+.problem-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:900px;margin:0 auto}
+.prob-card{background:#fff;border:1px solid rgba(212,184,150,0.4);padding:28px 28px 28px 24px;border-left:4px solid var(--tan);transition:transform 0.2s}
+.prob-card:hover{transform:translateY(-2px)}
+.prob-icon{width:38px;height:38px;background:var(--tan-pale);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.prob-icon svg{width:18px;height:18px;stroke:var(--navy);fill:none;stroke-width:2}
+.prob-title{font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.prob-text{font-family:Arial,sans-serif;font-size:13px;color:#555;line-height:1.6}
+
+.whoweare{background:var(--navy)}
+.who-wrap{display:flex;gap:60px;align-items:center;max-width:1000px;margin:0 auto}
+.who-content p{font-family:Arial,sans-serif;font-size:14px;color:var(--text-muted);line-height:1.8;margin-bottom:16px}
+.who-check{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px}
+.who-check-dot{width:16px;height:16px;background:var(--tan);border-radius:50%;flex-shrink:0;margin-top:3px;display:flex;align-items:center;justify-content:center}
+.who-check-dot svg{width:8px;height:8px;stroke:#1a2744;fill:none;stroke-width:2.5}
+.who-check span{font-family:Arial,sans-serif;font-size:13px;color:var(--tan-light)}
+.who-stats{flex:0 0 240px;display:grid;gap:14px}
+.wstat{background:rgba(255,255,255,0.05);border:1px solid rgba(212,184,150,0.2);padding:26px 22px;text-align:center}
+.wstat-num{font-size:36px;color:var(--tan);font-weight:400}
+.wstat-label{font-family:Arial,sans-serif;font-size:11px;color:var(--text-muted);letter-spacing:1px;text-transform:uppercase;margin-top:8px}
+
+.services{background:#fff}
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}
+.svc-card{border:1px solid rgba(212,184,150,0.3);overflow:hidden;transition:transform 0.2s,box-shadow 0.2s}
+.svc-card:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(26,39,68,0.1)}
+.svc-head{background:var(--navy);padding:16px 20px;display:flex;align-items:center;gap:12px}
+.svc-head-icon{width:32px;height:32px;background:rgba(212,184,150,0.15);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.svc-head-icon svg{width:16px;height:16px;stroke:var(--tan);fill:none;stroke-width:2}
+.svc-head-title{font-family:Arial,sans-serif;font-size:13px;font-weight:700;color:var(--tan);letter-spacing:0.5px}
+.svc-body{padding:20px;background:var(--tan-pale)}
+.svc-item{font-family:Arial,sans-serif;font-size:12px;color:#555;padding:5px 0;border-bottom:1px solid rgba(212,184,150,0.25);display:flex;align-items:center;gap:8px}
+.svc-item:last-child{border-bottom:none}
+.svc-item::before{content:'';width:4px;height:4px;background:var(--tan);border-radius:50%;flex-shrink:0}
+
+.howitworks{background:var(--tan-pale)}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}
+.step{background:#fff;border:1px solid rgba(212,184,150,0.35);padding:28px 24px}
+.step-num{font-size:48px;color:rgba(212,184,150,0.35);font-weight:400;line-height:1;margin-bottom:12px}
+.step-title{font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.step-text{font-family:Arial,sans-serif;font-size:12px;color:#666;line-height:1.6}
+
+.why{background:var(--navy)}
+.compare{max-width:900px;margin:0 auto;border:1px solid rgba(212,184,150,0.2)}
+.compare-header{display:grid;grid-template-columns:1fr 1fr;background:rgba(255,255,255,0.04)}
+.ch-label{padding:14px 24px;font-family:Arial,sans-serif;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted)}
+.ch-label.featured{background:var(--tan);color:var(--navy);font-weight:700;text-align:center}
+.compare-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid rgba(212,184,150,0.12)}
+.cr-cell{padding:14px 24px;font-family:Arial,sans-serif;font-size:13px;color:var(--text-muted);display:flex;align-items:center;gap:10px}
+.cr-cell.good{color:var(--tan-light);background:rgba(212,184,150,0.04)}
+.cr-x{color:#c0392b;font-size:14px;flex-shrink:0}
+.cr-check{color:var(--tan);font-size:14px;flex-shrink:0;font-weight:700}
+
+.pricing{background:#fff}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}
+.plan{border:1px solid rgba(212,184,150,0.35);overflow:hidden;transition:transform 0.2s}
+.plan:hover{transform:translateY(-3px)}
+.plan.featured{border:2px solid var(--tan)}
+.plan-badge{background:var(--tan);color:var(--navy);font-family:Arial,sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-align:center;padding:7px;text-transform:uppercase}
+.plan-head{background:var(--navy);padding:28px 24px}
+.plan-name{font-family:Arial,sans-serif;font-size:11px;letter-spacing:2px;color:var(--tan);text-transform:uppercase;margin-bottom:8px}
+.plan-price{font-size:34px;color:#fff;font-weight:400}
+.plan-price span{font-family:Arial,sans-serif;font-size:14px;color:var(--text-muted)}
+.plan-ideal{font-family:Arial,sans-serif;font-size:12px;color:var(--text-muted);margin-top:8px;font-style:italic}
+.plan-body{padding:24px;background:var(--tan-pale)}
+.plan-feature{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid rgba(212,184,150,0.25);font-family:Arial,sans-serif;font-size:12px;color:#444}
+.plan-feature:last-child{border-bottom:none}
+.plan-feature::before{content:'✓';color:var(--navy);font-weight:700;flex-shrink:0}
+.plan-cta{padding:20px 24px;background:#fff;border-top:1px solid rgba(212,184,150,0.3)}
+.plan-btn{width:100%;padding:12px;background:var(--navy);color:var(--tan);font-family:Arial,sans-serif;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--navy);cursor:pointer;transition:all 0.2s}
+.plan-btn:hover{background:#fff;color:var(--navy)}
+.plan.featured .plan-btn{background:var(--tan);color:var(--navy);border-color:var(--tan)}
+.plan.featured .plan-btn:hover{background:var(--navy);color:var(--tan)}
+
+.quality{background:var(--tan-pale)}
+.qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}
+.qcard{background:#fff;border:1px solid rgba(212,184,150,0.35);padding:24px}
+.qcard-icon{width:40px;height:40px;background:var(--navy);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.qcard-icon svg{width:18px;height:18px;stroke:var(--tan);fill:none;stroke-width:2}
+.qcard-title{font-family:Arial,sans-serif;font-size:14px;font-weight:700;color:var(--navy);margin-bottom:8px}
+.qcard-text{font-family:Arial,sans-serif;font-size:12px;color:#666;line-height:1.6}
+
+.cta-section{background:var(--navy);padding:72px 40px;text-align:center}
+.cta-title{font-size:36px;color:#fff;font-weight:400;margin-bottom:12px}
+.cta-title em{color:var(--tan);font-style:italic}
+.cta-sub{font-family:Arial,sans-serif;font-size:14px;color:var(--text-muted);margin-bottom:36px}
+.cta-contact{display:flex;gap:32px;justify-content:center;margin-top:40px;flex-wrap:wrap}
+.contact-item{display:flex;align-items:center;gap:10px}
+.contact-item svg{width:18px;height:18px;stroke:var(--tan);fill:none;stroke-width:2;flex-shrink:0}
+.contact-item span{font-family:Arial,sans-serif;font-size:14px;color:var(--tan-light)}
+.partners{font-family:Arial,sans-serif;font-size:12px;color:var(--text-muted);margin-top:40px;letter-spacing:0.5px}
+.divider{width:60px;height:1px;background:var(--tan);opacity:0.4;margin:40px auto}
+footer{background:#0f1a30;padding:22px 40px;display:flex;justify-content:space-between;align-items:center}
+footer p{font-family:Arial,sans-serif;font-size:12px;color:var(--text-muted)}
+footer .tagline{color:var(--tan);font-size:12px;font-family:Arial,sans-serif}
+
+@media(max-width:768px){
+  .hero{flex-direction:column;padding:48px 20px}
+  .hero-stats{width:100%;flex:none}
+  .problem-grid,.steps,.svc-grid,.pricing-grid,.qgrid{grid-template-columns:1fr}
+  .who-wrap{flex-direction:column}
+  .steps{grid-template-columns:repeat(2,1fr)}
+  nav{padding:14px 20px}
+  .nav-links{display:none}
+  section{padding:48px 20px}
+}
+</style>
+</head>
+<body>
+
+<!-- REUSABLE LOGO SVGs -->
+<!-- Light logo (tan on dark bg) used in nav & hero -->
+<svg id="logo-light-tpl" style="display:none" viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg">
+  <!-- F bracket mark -->
+  <rect x="2" y="4" width="32" height="6" fill="#d4b896"/>
+  <rect x="2" y="16" width="22" height="6" fill="#d4b896"/>
+  <rect x="2" y="28" width="32" height="6" fill="#d4b896"/>
+  <rect x="2" y="28" width="6" height="20" fill="#d4b896"/>
+  <!-- vertical divider -->
+  <line x1="46" y1="4" x2="46" y2="48" stroke="#d4b896" stroke-width="1.5" opacity="0.5"/>
+  <!-- wordmark -->
+  <text x="56" y="34" font-family="Georgia, serif" font-size="26" font-weight="400" fill="#d4b896" letter-spacing="-0.5">FinLyft Advisors</text>
+  <text x="56" y="46" font-family="Arial, sans-serif" font-size="9" fill="#a8b4c8" letter-spacing="0.8">Simplifying Compliance, Amplifying Growth</text>
+</svg>
+
+<!-- Dark logo (navy on light bg) used in footer -->
+<svg id="logo-dark-tpl" style="display:none" viewBox="0 0 220 52" xmlns="http://www.w3.org/2000/svg">
+  <rect x="2" y="4" width="32" height="6" fill="#1a2744"/>
+  <rect x="2" y="16" width="22" height="6" fill="#1a2744"/>
+  <rect x="2" y="28" width="32" height="6" fill="#1a2744"/>
+  <rect x="2" y="28" width="6" height="20" fill="#1a2744"/>
+  <line x1="46" y1="4" x2="46" y2="48" stroke="#1a2744" stroke-width="1.5" opacity="0.4"/>
+  <text x="56" y="34" font-family="Georgia, serif" font-size="26" font-weight="400" fill="#1a2744" letter-spacing="-0.5">FinLyft Advisors</text>
+  <text x="56" y="46" font-family="Arial, sans-serif" font-size="9" fill="#555" letter-spacing="0.8">Simplifying Compliance, Amplifying Growth</text>
+</svg>
+
+<!-- NAV -->
+<nav>
+  <img src="https://res.cloudinary.com/dbdwuznww/image/upload/f_auto,q_auto/LOGO_LIGHT_nz0id6" style="height:44px;width:auto;object-fit:contain" alt="FinLyft Advisors"/>
+  <div class="nav-links">
+    <a href="#services">Services</a>
+    <a href="#how">How It Works</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Free Consultation</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-eyebrow">Simplifying Compliance, Amplifying Growth</div>
+    <h1 class="hero-title">Your Trusted Partner for<br><em>Smarter Tax &amp; Compliance</em></h1>
+    <p class="hero-sub">Tech-powered, transparent, and trustworthy — FinLyft Advisors handles your compliance end-to-end so you can focus on what matters most: growing your business.</p>
+    <div class="hero-services">
+      <span class="hero-tag">GST</span><span class="hero-tag">Income Tax</span><span class="hero-tag">TDS</span><span class="hero-tag">Bookkeeping</span><span class="hero-tag">GST Litigation</span>
+    </div>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Book Free Consultation</button>
+      <button class="btn-secondary" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Technology-Driven Process</div></div>
+    <div class="stat-card"><div class="stat-num">GST</div><div class="stat-label">Certified Practitioners</div></div>
+    <div class="stat-card"><div class="stat-num">₹0</div><div class="stat-label">Hidden Charges — Ever</div></div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section class="problem">
+  <div class="section-eyebrow">The Challenge</div>
+  <h2 class="section-title">Every Entrepreneur Faces This</h2>
+  <p class="section-sub">Compliance complexity shouldn't be a barrier to growth. We solve the four biggest pain points.</p>
+  <div class="problem-grid">
+    <div class="prob-card">
+      <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M9 12h6M9 16h6M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/></svg></div>
+      <div class="prob-title">Confusing Compliance</div>
+      <p class="prob-text">GST filings, ITC claims, notice responses — complex rules that eat into your valuable time and focus.</p>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div>
+      <div class="prob-title">Costly CA Retainers</div>
+      <p class="prob-text">Traditional firms charge premium fees even for routine filings with little transparency or accountability.</p>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
+      <div class="prob-title">Manual Errors &amp; Delays</div>
+      <p class="prob-text">Paper-based processes lead to missed deadlines, penalties, and unnecessary stress at every filing cycle.</p>
+    </div>
+    <div class="prob-card">
+      <div class="prob-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+      <div class="prob-title">No Tech Adoption</div>
+      <p class="prob-text">Most advisors still rely on outdated methods, missing automation opportunities that reduce errors and save time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE ARE -->
+<section class="whoweare">
+  <div class="who-wrap">
+    <div class="who-content" style="flex:1">
+      <div class="section-eyebrow" style="text-align:left">Who We Are</div>
+      <h2 style="font-size:28px;color:#fff;font-weight:400;margin-bottom:16px;text-align:left">A Next-Generation Tax Practitioner Firm</h2>
+      <p>FinLyft Advisors combines deep compliance expertise with cutting-edge technology to deliver fast, accurate, and affordable financial services — built for the digital era.</p>
+      <div style="margin-top:20px">
+        <div class="who-check"><div class="who-check-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5"/></svg></div><span>GST Practitioner Certificate Holders</span></div>
+        <div class="who-check"><div class="who-check-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5"/></svg></div><span>Specialists in GST Compliance &amp; Litigation</span></div>
+        <div class="who-check"><div class="who-check-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5"/></svg></div><span>Experienced across diverse industries</span></div>
+        <div class="who-check"><div class="who-check-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5"/></svg></div><span>100% technology-driven operations</span></div>
+        <div class="who-check"><div class="who-check-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4.5,7.5 8,2.5"/></svg></div><span>Serving clients Pan-India</span></div>
+      </div>
+    </div>
+    <div class="who-stats">
+      <div class="wstat"><div class="wstat-num">100%</div><div class="wstat-label">Tech-Driven Process</div></div>
+      <div class="wstat"><div class="wstat-num">GST</div><div class="wstat-label">Certified Practitioners</div></div>
+      <div class="wstat"><div class="wstat-num">₹0</div><div class="wstat-label">Hidden Charges</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-eyebrow">What We Do</div>
+  <h2 class="section-title">End-to-End Compliance, Handled For You</h2>
+  <p class="section-sub">Six service pillars covering every compliance need for freelancers, startups, and established businesses.</p>
+  <div class="svc-grid">
+    <div class="svc-card">
+      <div class="svc-head"><div class="svc-head-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="svc-head-title">GST Compliance</div></div>
+      <div class="svc-body">
+        <div class="svc-item">GSTR-1, 3B, Annual Return</div>
+        <div class="svc-item">ITC Reconciliation &amp; GSTR-2B Matching</div>
+        <div class="svc-item">GST Refunds</div>
+        <div class="svc-item">ITC Reversal Calculation</div>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-head"><div class="svc-head-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 15l5-3-5-3v6z"/></svg></div><div class="svc-head-title">GST Litigation</div></div>
+      <div class="svc-body">
+        <div class="svc-item">SCN Reply Drafting</div>
+        <div class="svc-item">Appeals &amp; Hearings</div>
+        <div class="svc-item">Departmental Audit Support</div>
+        <div class="svc-item">Litigation Readiness Audit</div>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-head"><div class="svc-head-icon"><svg viewBox="0 0 24 24"><path d="M9 12h6M9 16h6M17 21H7a2 2 0 01-2-2V5a2 2 0 012-2h7l5 5v11a2 2 0 01-2 2z"/></svg></div><div class="svc-head-title">Income Tax Returns</div></div>
+      <div class="svc-body">
+        <div class="svc-item">ITR-1 to ITR-6</div>
+        <div class="svc-item">Capital Gains &amp; Business Income</div>
+        <div class="svc-item">Tax Computation Sheets</div>
+        <div class="svc-item">Tax Planning Advisory</div>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-head"><div class="svc-head-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="svc-head-title">TDS Compliance</div></div>
+      <div class="svc-body">
+        <div class="svc-item">Form 24Q / 26Q / 27Q</div>
+        <div class="svc-item">TDS Reconciliation</div>
+        <div class="svc-item">Default Correction Statements</div>
+        <div class="svc-item">Lower Deduction Certificates</div>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-head"><div class="svc-head-icon"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 10h16M4 14h8M4 18h8"/></svg></div><div class="svc-head-title">Bookkeeping</div></div>
+      <div class="svc-body">
+        <div class="svc-item">Tally / Zoho / QuickBooks</div>
+        <div class="svc-item">Monthly &amp; Quarterly Finalization</div>
+        <div class="svc-item">P&amp;L and Balance Sheet</div>
+        <div class="svc-item">GST-Mapped Ledger Entries</div>
+      </div>
+    </div>
+    <div class="svc-card">
+      <div class="svc-head"><div class="svc-head-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div><div class="svc-head-title">Startup Support</div></div>
+      <div class="svc-body">
+        <div class="svc-item">Business &amp; GST Registration</div>
+        <div class="svc-item">MSME / Udyam Registration</div>
+        <div class="svc-item">LUT Filing</div>
+        <div class="svc-item">Compliance Calendar Setup</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="howitworks" id="how">
+  <div class="section-eyebrow">The Process</div>
+  <h2 class="section-title">How It Works</h2>
+  <p class="section-sub">A seamless six-step process from consultation to delivery — always on time, always accurate.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">01</div><div class="step-title">Book a Consultation</div><p class="step-text">Schedule a free 30-minute call. We understand your compliance needs and current setup.</p></div>
+    <div class="step"><div class="step-num">02</div><div class="step-title">Share Documents</div><p class="step-text">Send your raw data — invoices, ledgers, challans, bank statements — via our secure encrypted channel.</p></div>
+    <div class="step"><div class="step-num">03</div><div class="step-title">We Process &amp; Prepare</div><p class="step-text">Our team prepares returns and reconciliations with a mandatory multi-stage quality check.</p></div>
+    <div class="step"><div class="step-num">04</div><div class="step-title">Review &amp; Approve</div><p class="step-text">You receive a clean, ready-to-file output. Review, request revisions, and approve before anything is submitted.</p></div>
+    <div class="step"><div class="step-num">05</div><div class="step-title">Filing &amp; Delivery</div><p class="step-text">Returns are filed on time with all acknowledgements and confirmations delivered to you promptly.</p></div>
+    <div class="step"><div class="step-num">06</div><div class="step-title">Transparent Settlement</div><p class="step-text">Clean invoicing, no surprise charges. What was agreed is what you pay — nothing more, nothing less.</p></div>
+  </div>
+</section>
+
+<!-- WHY FINLYFT -->
+<section class="why">
+  <div class="section-eyebrow" style="color:var(--tan)">Why FinLyft</div>
+  <h2 class="section-title" style="color:#fff">FinLyft vs Traditional Firms</h2>
+  <p class="section-sub" style="color:var(--text-muted)">We're not another advisory firm. We're a step-change in how compliance gets done.</p>
+  <div class="compare">
+    <div class="compare-header">
+      <div class="ch-label">Traditional Firms</div>
+      <div class="ch-label featured">✦ FinLyft Advisors</div>
+    </div>
+    <div class="compare-row"><div class="cr-cell"><span class="cr-x">✕</span> High retainer fees, low transparency</div><div class="cr-cell good"><span class="cr-check">✓</span> Transparent, affordable pricing</div></div>
+    <div class="compare-row"><div class="cr-cell"><span class="cr-x">✕</span> Manual processes, frequent errors</div><div class="cr-cell good"><span class="cr-check">✓</span> Fully automated, zero-error filings</div></div>
+    <div class="compare-row"><div class="cr-cell"><span class="cr-x">✕</span> Slow response, missed deadlines</div><div class="cr-cell good"><span class="cr-check">✓</span> 24–48 hr turnaround SLA</div></div>
+    <div class="compare-row"><div class="cr-cell"><span class="cr-x">✕</span> No updates on filing status</div><div class="cr-cell good"><span class="cr-check">✓</span> Expert-led status updates always</div></div>
+    <div class="compare-row"><div class="cr-cell"><span class="cr-x">✕</span> One-size-fits-all approach</div><div class="cr-cell good"><span class="cr-check">✓</span> Tailored for new-age businesses</div></div>
+    <div class="compare-row"><div class="cr-cell"><span class="cr-x">✕</span> No dedicated account manager</div><div class="cr-cell good"><span class="cr-check">✓</span> Dedicated RM for every client</div></div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-eyebrow">Pricing</div>
+  <h2 class="section-title">Simple, Transparent Pricing</h2>
+  <p class="section-sub">No surprises. No hidden fees. Just honest value for your compliance needs.</p>
+  <div class="pricing-grid">
+    <div class="plan">
+      <div class="plan-head">
+        <div class="plan-name">Starter</div>
+        <div class="plan-price">₹1,499 <span>/ month</span></div>
+        <div class="plan-ideal">Ideal for Freelancers &amp; Individuals</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-feature">GST Return Filing (GSTR-1 &amp; 3B)</div>
+        <div class="plan-feature">Income Tax Return (1 filing)</div>
+        <div class="plan-feature">Email Support</div>
+      </div>
+      <div class="plan-cta"><button class="plan-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button></div>
+    </div>
+    <div class="plan featured">
+      <div class="plan-badge">★ Most Popular</div>
+      <div class="plan-head">
+        <div class="plan-name">Growth</div>
+        <div class="plan-price">₹3,999 <span>/ month</span></div>
+        <div class="plan-ideal">Best for Startups &amp; Growing Businesses</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-feature">All Starter features</div>
+        <div class="plan-feature">TDS Returns (1 quarter)</div>
+        <div class="plan-feature">Bookkeeping (up to 200 transactions)</div>
+        <div class="plan-feature">Phone Support</div>
+      </div>
+      <div class="plan-cta"><button class="plan-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button></div>
+    </div>
+    <div class="plan">
+      <div class="plan-head">
+        <div class="plan-name">Scale</div>
+        <div class="plan-price">Custom</div>
+        <div class="plan-ideal">For Established Businesses</div>
+      </div>
+      <div class="plan-body">
+        <div class="plan-feature">All Growth features</div>
+        <div class="plan-feature">GST Litigation Support</div>
+        <div class="plan-feature">Unlimited Bookkeeping</div>
+        <div class="plan-feature">Dedicated Relationship Manager</div>
+      </div>
+      <div class="plan-cta"><button class="plan-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact Us</button></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUALITY -->
+<section class="quality">
+  <div class="section-eyebrow">Our Promise</div>
+  <h2 class="section-title">Quality &amp; Confidentiality First</h2>
+  <p class="section-sub">Every engagement is backed by strict standards, secure systems, and a commitment to zero errors.</p>
+  <div class="qgrid">
+    <div class="qcard"><div class="qcard-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><div class="qcard-title">Strict NDA &amp; Confidentiality</div><p class="qcard-text">We sign a binding NDA before engagement. Client data never leaves our secure, encrypted systems.</p></div>
+    <div class="qcard"><div class="qcard-icon"><svg viewBox="0 0 24 24"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div><div class="qcard-title">Dual-Stage Quality Review</div><p class="qcard-text">Every output is reviewed by a senior team member. Multi-stage QC for every single filing submission.</p></div>
+    <div class="qcard"><div class="qcard-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="qcard-title">Secure Data Handling</div><p class="qcard-text">End-to-end encrypted file transfers. No client data shared via personal email or informal channels.</p></div>
+    <div class="qcard"><div class="qcard-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="qcard-title">Turnaround Guarantee</div><p class="qcard-text">Standard filings: 24–48 hrs. Complex returns: agreed SLA. Delays trigger immediate priority escalation.</p></div>
+    <div class="qcard"><div class="qcard-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><div class="qcard-title">Long-Term Partnership</div><p class="qcard-text">We grow when you grow. Volume-based fee reductions kick in as your business scales with us.</p></div>
+    <div class="qcard"><div class="qcard-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="qcard-title">Zero-Error Guarantee</div><p class="qcard-text">Automated reconciliation plus manual review ensures zero tolerance for errors in every submission.</p></div>
+  </div>
+</section>
+
+<!-- CTA / CONTACT -->
+<section class="cta-section" id="contact">
+  <div class="section-eyebrow" style="color:var(--tan)">Get In Touch</div>
+  <h2 class="cta-title">Ready to <em>Simplify Your Compliance?</em></h2>
+  <p class="cta-sub">Let FinLyft handle the complexity — so you can focus on growing your business.<br>Book a FREE 30-minute consultation today.</p>
+  <button class="btn-primary" style="font-size:14px;padding:15px 36px" onclick="window.open('mailto:reach@finlyftadvisors.com?subject=Free Consultation Request')">Book Free Consultation →</button>
+  <div class="divider"></div>
+  <div class="cta-contact">
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span>reach@finlyftadvisors.com</span>
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 01.01 2.18 2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 14.92v2z"/></svg>
+      <span>(+91) 87621-88332</span>
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      <span>www.finlyftadvisors.com</span>
+    </div>
+  </div>
+  <div class="partners">Ranjith H C &amp; Kumar Swami — Partners &nbsp;|&nbsp; FinLyft Advisors &nbsp;|&nbsp; Serving clients Pan-India</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://res.cloudinary.com/dbdwuznww/image/upload/f_auto,q_auto/LOGO_LIGHT_nz0id6" style="height:38px;width:auto;object-fit:contain;opacity:0.85" alt="FinLyft Advisors"/>
+  <p>© 2026 FinLyft Advisors. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
